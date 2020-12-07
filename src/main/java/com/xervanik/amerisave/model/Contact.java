@@ -2,6 +2,7 @@ package com.xervanik.amerisave.model;
 
 public class Contact {
     //Contact class
+    private Integer id;
     private String firstName;
     private String lastName;
     private String email;
@@ -10,7 +11,8 @@ public class Contact {
 
     }
 
-    public Contact(String fName, String lName, String emailNew) {
+    public Contact(Integer id, String fName, String lName, String emailNew) {
+        this.id = id;
         this.firstName = fName;
         this.lastName = lName;
         this.email = emailNew;
@@ -38,5 +40,13 @@ public class Contact {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
