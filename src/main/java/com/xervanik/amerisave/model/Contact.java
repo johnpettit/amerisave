@@ -11,8 +11,8 @@ public class Contact {
 
     }
 
-    public Contact(Integer id, String fName, String lName, String emailNew) {
-        this.id = id;
+    public Contact(String fName, String lName, String emailNew) {
+        this.id = id = -1;
         this.firstName = fName;
         this.lastName = lName;
         this.email = emailNew;

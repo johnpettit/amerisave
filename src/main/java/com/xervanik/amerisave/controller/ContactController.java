@@ -1,26 +1,42 @@
 package com.xervanik.amerisave.controller;
 
 import com.xervanik.amerisave.model.Contact;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.xervanik.amerisave.repository.ContactRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
 public class ContactController {
-    private Integer idCounter = 1;
+    private ContactRepository contactRepository = new ContactRepository();
 
     @GetMapping("/contact")
-    public ArrayList<Contact> greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        Contact c1 = new Contact(idCounter, "John", "Pettit", "jp@gmail.com");
-        idCounter++;
-        Contact c2 = new Contact(idCounter, "Fred", "Smith", "fs@gmail.com");
-        idCounter++;
-        ArrayList<Contact> contacts = new ArrayList<Contact>();
-        contacts.add(c1);
-        contacts.add(c2);
-        return contacts;
+    public ArrayList<Contact> getAll() {
+        return contactRepository.getAllContacts();
     }
 
+    @GetMapping("/contact/{id}")
+    public Contact getOne(@PathVariable Integer id) {
+        Contact contact = contactRepository.getOneContact(id);
+        return contact;
+    }
+
+    @PostMapping("/contact")
+    public Contact createContact(@RequestBody Contact contact) {
+        Contact newContact = contactRepository.addContact(contact);
+
+        return newContact;
+    }
+
+    @PutMapping("/contact")
+    public String editContact(@RequestBody Contact contact) {
+        contactRepository.editContact(contact);
+        return "{\"message\":\"success\"}";
+    }
+
+    @DeleteMapping("/contact/{id}")
+    public String deleteContact(@PathVariable Integer id) {
+        contactRepository.removeContact(id);
+        return "{\"message\":\"success\"}";
+    }
 }
