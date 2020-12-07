@@ -28,6 +28,7 @@ public class ContactController {
         return newContact;
     }
 
+    //Maybe better as an id path param and a JSON body   More RESTful
     @PutMapping("/contact")
     public String editContact(@RequestBody Contact contact) {
         contactRepository.editContact(contact);

@@ -4,9 +4,10 @@ import com.xervanik.amerisave.model.Contact;
 
 import java.util.ArrayList;
 
+//TODO add a backend DB
 public class ContactRepository {
     private ArrayList<Contact> contactList = new ArrayList<Contact>();
-    private Integer idCounter = 1;
+    private Integer idCounter = 1;  //TODO prefer to use UUIDs as ids
 
     public ContactRepository() {
     }
@@ -24,6 +25,7 @@ public class ContactRepository {
         return this.contactList;
     }
 
+    //TODO some better error checking  Checking for dupes on email?
     public Contact addContact(Contact contact) {
         contact.setId(this.idCounter);
         idCounter++;
@@ -31,6 +33,7 @@ public class ContactRepository {
         return contact;
     }
 
+    //TODO some better error checking
     public void editContact(Contact eContact) {
         for(Contact contact: contactList) {
             if(contact.getId() == eContact.getId()) {
@@ -42,6 +45,7 @@ public class ContactRepository {
         }
     }
 
+    //TODO some better error checking
     public void removeContact(Integer id) {
         for(Contact contact: contactList) {
             if(contact.getId() == id) {
